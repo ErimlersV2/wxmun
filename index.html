@@ -1,0 +1,755 @@
+<html>
+<head>
+	<meta charset="utf-8">
+<script type="text/javascript" src="https://bitwiseshiftleft.github.io/sjcl/sjcl.js"></script>
+<script>
+function setCookie() {document.cookie='ppkcookie1=testcookie; expires=Thu, 2 Aug 2020 20:47:11 UTC; path=/asd'}
+window.onload=setCookie;
+function ShowYieldMenu(){
+	document.getElementById("YieldMenuPresentation").style.display="block";
+	document.getElementById("YieldMenu").style.display="block";
+}
+function closeYieldMenu() {
+	document.getElementById("YieldMenuPresentation").style.display="none";
+	document.getElementById("YieldMenu").style.display="none";
+}
+function ShowPresentMenu() {
+	document.getElementById("PresentDivPresentation").style.display="block";
+	document.getElementById("PresentDiv").style.display="block"
+}
+function ClosePresentMenu(){
+	document.getElementById("PresentDivPresentation").style.display="none";
+	document.getElementById("PresentDiv").style.display="none"
+}
+function ShowMenu(x){
+	if(x == 1){
+		document.getElementById("GeneralSpeakersList").style.display="block";
+		document.getElementById("SingleSpeakerList").style.display="none";
+		document.getElementById("ModeratedCaucus").style.display="none";
+		document.getElementById("UnmoderatedCaucus").style.display="none";
+		document.getElementById("ProceduralVoting").style.display="none";
+		document.getElementById("RollCallVote").style.display="none";
+	}
+	if(x == 2){
+		document.getElementById("GeneralSpeakersList").style.display="none";
+		document.getElementById("SingleSpeakerList").style.display="block";
+		document.getElementById("ModeratedCaucus").style.display="none";
+		document.getElementById("UnmoderatedCaucus").style.display="none";
+		document.getElementById("ProceduralVoting").style.display="none";
+		document.getElementById("RollCallVote").style.display="none";
+	}
+	if(x == 3){
+		document.getElementById("GeneralSpeakersList").style.display="none";
+		document.getElementById("SingleSpeakerList").style.display="none";
+		document.getElementById("ModeratedCaucus").style.display="block";
+		document.getElementById("UnmoderatedCaucus").style.display="none";
+		document.getElementById("ProceduralVoting").style.display="none";
+		document.getElementById("RollCallVote").style.display="none";
+	}
+	if(x == 4){
+		document.getElementById("GeneralSpeakersList").style.display="none";
+		document.getElementById("SingleSpeakerList").style.display="none";
+		document.getElementById("ModeratedCaucus").style.display="none";
+		document.getElementById("UnmoderatedCaucus").style.display="block";
+		document.getElementById("ProceduralVoting").style.display="none";
+		document.getElementById("RollCallVote").style.display="none";
+	}
+	if(x == 5){
+		document.getElementById("GeneralSpeakersList").style.display="none"
+		document.getElementById("SingleSpeakerList").style.display="none"
+		document.getElementById("ModeratedCaucus").style.display="none";
+		document.getElementById("UnmoderatedCaucus").style.display="none";
+		document.getElementById("ProceduralVoting").style.display="block";
+		document.getElementById("RollCallVote").style.display="none";
+	}
+	if(x == 6){
+		document.getElementById("GeneralSpeakersList").style.display="none"
+		document.getElementById("SingleSpeakerList").style.display="none"
+		document.getElementById("ModeratedCaucus").style.display="none";
+		document.getElementById("UnmoderatedCaucus").style.display="none";
+		document.getElementById("ProceduralVoting").style.display="none";
+		document.getElementById("RollCallVote").style.display="block";
+	}
+}
+</script>
+<style>
+html,body {
+	padding:0;
+	margin:0;
+	overflow: hidden;
+}
+.TopBar{
+	height: 150px;
+	font-family: Arial;
+}
+.Menues{
+	color: white;
+	background: black;
+	text-align: center;
+}
+.Menues span{
+	display: inline-block;
+	padding: 15px 5px;
+}
+.Menues span:hover{
+	background-color: #aaa;
+}
+#GeneralSpeakersList{
+	padding-top: 30px;
+}
+.GeneralTable{
+	padding: 10px 10px;
+	width: 500px;
+}
+
+/* General Speakers List Classes */
+#speakersListLeft{
+	float: left;
+	width: 49%;
+}
+.vl{
+	float: left;
+	width: 1px;
+	padding-right: 5px;
+	border-left: 1px solid black;
+	height: 1%;
+	min-height: 80%;
+}
+#speakersListRight{
+	float: left;
+	width: 49%;
+}
+.SpeakerFlag{
+	width: 100px;
+	padding-bottom: 25px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.SpeakerName{
+	margin-left: auto;
+	margin-right: auto;
+	font-family: Arial;
+	font-size: 36px;
+	padding-bottom: 25px;
+}
+.SpeakerTime{
+	font-family: Arial;
+	font-size: 27px;
+	padding-bottom: 25px;
+}
+.SpeakerTimeBar{
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+	height: 30px;
+	background-color: #bbb;
+}
+.SpeakerTimeBarFiller{
+	background-color: #31e20d;
+	height: 30px;
+	width: 5%;
+	margin: 0px;
+	padding:0px;
+}
+#SpeakerCountryAdder{
+	width: 100%;
+}
+#SpeakerCountries{
+	margin-top: 25px;
+	overflow-y: scroll;
+	height: 30%;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select:none;
+	user-select:none;
+	-o-user-select:none;
+}
+#SpeakerCountries ul,li{
+	list-style-type: none;
+}
+#SpeakerCountries li:hover{
+	background: #026fd6
+}
+#YieldMenuPresentation{
+	display: none;
+	position: absolute;
+	bottom:0;
+	right: 0;
+	left:0;
+	top:0;
+	background-color: black;
+	opacity: 70%;
+	z-index: 1000;
+}
+#YieldMenu{
+	display: none;
+	position: absolute;
+	background-color: white;
+	top: 0;
+	margin-left: auto;
+	margin-right: auto;
+	left:0;
+	right: 0;
+	bottom: 0;
+	width: 80%;
+	z-index: 10000;
+}
+
+/* Yield Menu */
+.YieldMenuInside{
+	padding:15px;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select:none;
+	user-select:none;
+	-o-user-select:none;
+}
+.YieldMenuInside li{
+	padding-bottom: 2px;
+}
+.YieldMenuInside li:hover{
+	background: #026fd6;
+	color: white;
+}
+
+/* Present Menu */
+
+#PresentDivPresentation{
+	display: none;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	margin: 0;
+	background-color: black;
+	opacity: 80%;
+	z-index: 1000;
+}
+#PresentDiv{
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 0px;
+	background-color: white;
+	width: 70vw;
+	height: 70vw;
+	z-index: 1001;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select:none;
+	user-select:none;
+	-o-user-select:none;
+}
+.PresentDivInside{
+	padding: 15px 15px;
+}
+.PresentDivInside li{
+	padding-bottom: 2px;
+}
+.PresentDivInside li:hover{
+	background: #026fd6;
+	color: white;
+}
+#PresentMembersDiv{
+	height: 30%;
+	overflow-y: scroll;
+}
+#PresentObserversDiv{
+	height: 30%;
+	overflow-y: scroll;
+}
+
+/* Unmoderated Caucus Classes*/
+#UnmoderatedCaucus{
+	display: none;
+	margin-top: 30px;
+}
+#UnmoderatedCaucusLeft{
+	float: left;
+	width: 49%;
+}
+#UnmoderatedCaucusRight{
+	float: left;
+	width: 49%;
+}
+#UnmoderatedCaucusTimeLeft{
+	font-size: 24px;
+	margin-top: 25px;
+	height: 100%;
+}
+.UnmoderatedCaucusTimer{
+	background-color: #bbb;
+	height: 30px;
+	margin-top: 150px;
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+}
+#UnmoderatedCaucusTimerFiller{
+	background-color: #31e20d;
+	width: 5%;
+	height: 30px;
+}
+
+/* ModeratedCaucus Classes */
+
+#ModeratedCaucus{
+	padding-top: 30px;
+	display: none;
+}
+
+#ModeratedCaucusLeft{
+	float: left;
+	width: 49%;
+}
+#ModeratedCaucusRight{
+	float: left;
+	width: 49%;
+}
+.ModeratedCaucusDelegateTimer{
+	background-color: #bbb;
+	height: 30px;
+	margin-top: 100px;
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+}
+.ModeratedCaucusTimer{
+	background-color: #bbb;
+	height: 30px;
+	margin-top: 50px;
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+}
+#ModeratedCaucusTimerFiller{
+	background-color: #31e20d;
+	width: 5%;
+	height: 30px;
+}
+#ModeratedCaucusDelegateTimerFiller{
+	background-color: #31e20d;
+	width: 5%;
+	height: 30px;
+}
+#ModeratedCaucusTimeText{
+	font-size: 24px;
+	margin-top: 25px;
+}
+#ModeratedCaucusDelegateTimeText{
+	font-size: 24px;
+	margin-top: 25px;
+}
+
+/* SingleSpeakerClasses */
+#SingleSpeakerList{
+	display: none;
+	margin-top: 30px;
+}
+.SingleSpeakerListLeft{
+	float: left;
+	width: 49%;
+}
+.SingleSpeakerListRight{
+	float: left;
+	width: 49%;
+}
+.SingleSpeakerFlag{
+	width: 100px;
+	padding-bottom: 25px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.SingleSpeakerName{
+	margin-left: auto;
+	margin-right: auto;
+	font-family: Arial;
+	font-size: 36px;
+	padding-bottom: 25px;
+}
+.SingleSpeakerTimeBar{
+	background-color: #bbb;
+	height: 30px;
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+}
+#SingleSpeakerTimeBarFiller{
+	background: #31e20d;
+	width: 5%;
+	height: 30px;
+}
+#SingleSpeakerTimeLeft{
+	font-family: Arial;
+	font-size: 27px;
+	padding-bottom: 25px;
+}
+.SingleSpeakerLeftButtons{
+	padding-top: 25px;
+}
+#SingleSpeakerCountries {
+	overflow-y: scroll;
+	height: 30%;
+}
+#SingleSpeakerCountries li{
+	padding-bottom: 2px;
+}
+#SingleSpeakerCountries li:hover{
+	background: #026fd6;
+	color: white;
+}
+
+/* Procedural Voting Classes */
+
+#ProceduralVoting {
+	display: none;
+	padding-top: 30px;
+}
+.ProceduralVotingLeft{
+	float: left;
+	width: 49%;
+}
+.ProceduralVotingRight{
+	float: left;
+	width: 49%;
+}
+.ProceduralVotingTimer{
+	background-color: #bbb;
+	height: 30px;
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+}
+#ProceduralVotingTimerFiller{
+	background: #31e20d;
+	width: 5%;
+	height: 30px;
+}
+#ProceduralVotingTimerText{
+	font-family: Arial;
+	font-size: 27px;
+	padding-bottom: 25px;
+}
+#ProceduralVotingVoterFlag{
+	margin-top: 30px;
+	width: 100px;
+	padding-bottom: 25px;
+}
+#ProceduralVotingVoterCountry{
+	margin-left: auto;
+	margin-right: auto;
+	font-family: Arial;
+	font-size: 36px;
+	padding-bottom: 25px;
+}
+#ProceduralVotingInFavourDiv{
+	height: 15%;
+	overflow-y: scroll;
+}
+#ProceduralVotingInFavourDiv li{
+	padding-bottom: 2px;
+}
+#ProceduralVotingInFavourDiv li:hover{
+	background: #026fd6;
+	color: white;
+}
+#ProceduralVotingAgainstDiv{
+	height: 15%;
+	overflow-y: scroll;
+}
+#ProceduralVotingAgainstDiv li{
+	padding-bottom: 2px;
+}
+#ProceduralVotingAgainstDiv li:hover{
+	background: #026fd6;
+	color: white;
+}
+#ProceduralVotingInFavourCountriesAdder{
+	width: 100%;
+}
+#ProceduralVotingAgainstCountriesAdder{
+	width: 100%;
+}
+</style>
+</head>
+<body>
+<div class="TopBar">
+<table class="GeneralTable">
+	<tr><td><span>Board ID: </span></td><td><input id="boardID" type="text"><button onclick="ConnectToBoardID();">Connect</button></td></tr>
+	<tr>
+		<td>Committee </td>
+		<td id="komite">
+			<select>
+				<option>UNHCR</option>
+				<option>ECOSOC</option>
+				<option>SPECPOL</option>
+				<option>UNEP</option>
+				<option>ICSU</option>
+				<option>CC: SYRIAN COUP D'ETAT 1961</option>
+			</select>
+		</td>
+	</tr>
+	<tr><td>Current Topic </td><td id="topic"><input id="CommitteeTopic" type="text"><button onclick="SetCommitteeTopic();">Set</button></td></tr>
+	<tr><td><button onclick="ShowPresentMenu();">Present</button></td><td id="presentNumber">15</td></tr>
+</table>
+<img style="position:absolute; right: 0;top: 0" width="150px" src="https://munboll.org/img/logo.jpg">
+</div>
+<div class="Menues">
+<span onclick="ShowMenu(1);for(var i=0;i < this.parentElement.children.length;i++){this.parentElement.children[i].style.background='black';this.parentElement.children[i].style.color='white'};this.style.background='#fff';this.style.color='black'">General Speakers List</span>
+<span onclick="ShowMenu(2);for(var i=0;i < this.parentElement.children.length;i++){this.parentElement.children[i].style.background='black';this.parentElement.children[i].style.color='white'};this.style.background='#fff';this.style.color='black'">Single Speaker</span>
+<span onclick="ShowMenu(3);for(var i=0;i < this.parentElement.children.length;i++){this.parentElement.children[i].style.background='black';this.parentElement.children[i].style.color='white'};this.style.background='#fff';this.style.color='black'">Moderated Caucus</span>
+<span onclick="ShowMenu(4);for(var i=0;i < this.parentElement.children.length;i++){this.parentElement.children[i].style.background='black';this.parentElement.children[i].style.color='white'};this.style.background='#fff';this.style.color='black'">Unmoderated Caucus</span>
+<span onclick="ShowMenu(5);for(var i=0;i < this.parentElement.children.length;i++){this.parentElement.children[i].style.background='black';this.parentElement.children[i].style.color='white'};this.style.background='#fff';this.style.color='black'">Procedural Voting</span>
+<span onclick="ShowMenu(6);for(var i=0;i < this.parentElement.children.length;i++){this.parentElement.children[i].style.background='black';this.parentElement.children[i].style.color='white'};this.style.background='#fff';this.style.color='black'">Roll Call Vote</span>
+</div>
+<!-- Present Div -->
+
+<div id="PresentDivPresentation" onclick="ClosePresentMenu();"></div>
+<div id="PresentDiv">
+	<div class="PresentDivInside">
+		<span>Members:</span>
+		<div id="PresentMembersDiv">
+
+		</div>
+		<span>Observers:</span>
+		<div id="PresentObserversDiv">
+			
+		</div>
+	</div> 
+</div>
+<!-- Present Div End -->
+<!-- Yield Div -->
+<div id="YieldMenuPresentation" onclick="closeYieldMenu();"></div>
+<div id="YieldMenu">
+<div class="YieldMenuInside" unselectable="on" onselectstart="return false;" onmousedown="return false;">
+<span>Yield To</span>
+<ul>
+	<li>Africa</li>
+	<li>Pakistan</li>
+	<li>USA</li>
+</ul>
+</div>
+</div>
+<!-- Yield Div end -->
+<div id="GeneralSpeakersList">
+<div id="speakersListLeft">
+<center>
+<img class="SpeakerFlag" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi0.wp.com%2Fwww.hotedge.com%2Fwp-content%2Fuploads%2F2013%2F03%2Fusa-flah-home-page-300x232.png&f=1&nofb=1" width="400px">
+<br>
+<span class="SpeakerName">United States Of America</span>
+</center>
+<div class="SpeakerTime">
+	<div class="SpeakerTimeBar"><div class="SpeakerTimeBarFiller" id="SpeakerPercentage"></div></div>
+	<center><div><span class="SpeakerTimeLeft" id="speakerTimeLeft">1:14 / 1:30</span></div></center>
+</div>
+<center>
+<div class="SpeakerLeftButtons">
+<button onclick="ShowYieldMenu();">Yield To Delegate</button>
+<button onclick="NextSpeaker();">Next Speaker</button>
+<br>
+<br>
+<button onclick="SpeakerTimeResume();">Resume</button>
+<button onclick="SpeakerTimePause();">Pause</button>
+<button onclick="SpeakerTimeStop();">Stop</button>
+</div>
+</center>
+</div>
+<div class="vl"></div>
+<div id="speakersListRight">
+	<center><span>Set speaker Time (seconds) : </span><input type="text" id="speakerTime" value="90"></center>
+	<hr>
+	<select id="SpeakerCountryAdder">
+		<option>test</option>
+	</select>
+	<div id="SpeakerCountries" unselectable="on" onselectstart="return false;" onmousedown="return false;">
+		<ul>
+		<li>Africa</li>
+		<li>Pakistan</li>
+		</ul>
+	</div>
+	<center><button id="GeneralSpeakersListClearButton" onclick="ClearGeneralSpeakersList();">Clear</button></center>
+</div>
+</div>
+<div id="SingleSpeakerList">
+<div class="SingleSpeakerListLeft">
+<center>
+<img class="SingleSpeakerFlag" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi0.wp.com%2Fwww.hotedge.com%2Fwp-content%2Fuploads%2F2013%2F03%2Fusa-flah-home-page-300x232.png&f=1&nofb=1" width="400px">
+<br>
+<span class="SingleSpeakerName">United States Of America</span>
+</center>
+<div class="SingleSpeakerTime">
+<div class="SingleSpeakerTimeBar"><div id="SingleSpeakerTimeBarFiller"></div></div>
+<center><div><span id="SingleSpeakerTimeLeft">1:14 / 1:30</span></div></center>
+</div>
+<center>
+<div class="SingleSpeakerLeftButtons">
+<button onclick="SpeakerTimeResume();">Resume</button>
+<button onclick="SpeakerTimePause();">Pause</button>
+<button onclick="SpeakerTimeStop();">Stop</button>
+</div>
+</center>
+</div>
+<div class="vl"></div>
+<div class="SingleSpeakerListRight">
+<center>
+	<span>Set speaker Time (seconds) : </span><input type="text" id="SingleSpeakerTime" value="90">
+</center>
+	<hr>
+	<div id="SingleSpeakerCountries" unselectable="on" onselectstart="return false;" onmousedown="return false;">
+		<ul>
+		<li>Africa</li>
+		<li>Pakistan</li>
+		</ul>
+	</div>
+</div>
+</div>
+
+<div id="ModeratedCaucus">
+<div id="ModeratedCaucusLeft">
+<div class="ModeratedCaucusDelegateTimer">
+	<div id="ModeratedCaucusDelegateTimerFiller"></div>
+</div>
+<center><div id="ModeratedCaucusDelegateTimeText">00:00 / 00:00</div></center>
+<div class="ModeratedCaucusTimer">
+	<div id="ModeratedCaucusTimerFiller"></div>
+</div>
+<center><div id="ModeratedCaucusTimeText">00:00:00 / 00:00:00</div></center>
+</div>
+<div class="vl"></div>
+<div id="ModeratedCaucusRight">
+	<h3>Start A New Moderated Caucus</h3>
+	<hr>
+	<table>
+		<tr>
+			<td>Topic</td>
+			<td><input type="text" id="ModeratedCaucusTopic"></td>
+		</tr>
+		<tr>
+			<td>Duration</td>
+			<td><input type="text" id="ModeratedCaucusHours" style="width: 50px;"><span>H</span><input type="text" id="ModeratedCaucusMinutes" style="width: 50px;"><span>M</span><input type="text" id="ModeratedCaucusSeconds" style="width: 50px;"><span>S</span></td>
+		</tr>
+		<tr>
+			<td>Time Per Speaker (sec)</td>
+			<td><input id="ModeratedCaucusSpeakerTime" type="text"></td>
+		</tr>
+		<tr>
+			<td><button>Stop</button></td>
+			<td><button>Ok</button><button>Cancel</button></td>
+		</tr>
+	</table>
+</div>
+</div>
+
+<div id="UnmoderatedCaucus">
+<div id="UnmoderatedCaucusLeft">
+	<div class="UnmoderatedCaucusTimer">
+		<div id="UnmoderatedCaucusTimerFiller"></div>
+	</div>
+	<center>
+		<div id="UnmoderatedCaucusTimeLeft">00:00:00 / 00:00:00</div>
+	</center>
+</div>
+<div class="vl"></div>
+<div id="UnmoderatedCaucusRight">
+	<h3>Start A New Unmoderated Caucus</h1>
+	<hr>
+	<table>
+		<tr>
+			<td>Topic</td>
+			<td><input type="text" id="UnmoderatedCaucusTopic"></td>
+		</tr>
+		<tr>
+			<td>Duration</td>
+			<td><input type="text" id="UnmoderatedCaucusHours" style="width: 50px;"><span>H</span><input type="text" id="UnmoderatedCaucusMinutes" style="width: 50px;"><span>M</span><input type="text" id="UnmoderatedCaucusSeconds" style="width: 50px;"><span>S</span></td>
+		</tr>
+		<tr>
+			<td><button>Stop</button></td>
+			<td><button>Ok</button><button>Cancel</button></td>
+		</tr>
+	</table>
+</div>
+</div>
+
+<div id="ProceduralVoting">
+<div class="ProceduralVotingLeft">
+<center>
+<input id="ProceduralVotingDebateReason" type="text" placeholder="Select A Reason To Debate">
+<br>
+<button id="ProceduralVotingInFavour">IN FAVOUR</button>
+<span>/</span>
+<button id="ProceduralVotingAgainst">AGAINST</button>
+<br>
+<img id="ProceduralVotingVoterFlag" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi0.wp.com%2Fwww.hotedge.com%2Fwp-content%2Fuploads%2F2013%2F03%2Fusa-flah-home-page-300x232.png&f=1&nofb=1" width="150px">
+<br>
+<span id="ProceduralVotingVoterCountry">United States Of America</span>
+</center>
+<div class="ProceduralVotingTimer"><div id="ProceduralVotingTimerFiller"></div></div>
+<center>
+	<div id="ProceduralVotingTimerText">00:00 / 00:00</div>
+</center>
+</div>
+<div class="vl"></div>
+<div class="ProceduralVotingRight">
+<center>
+<table>
+	<tr>
+		<td>Voting On: </td>
+		<td>
+			<select>
+				<option value="Agenda">Agenda</option>
+				<option value="CoD">Closure Of Debate</option>
+				<option value="PoD">Postponement of Debate</option>
+				<option value="RoD">Resumption of Debate</option>
+				<option value="Amd">Amendment</option>
+				<option value="DotQ">Division Of The Question</option>
+				<option value="Rec">Reconsideration</option>
+				<option value="other">Other</option>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td>Set Speaker Time</td>
+		<td><input type="text" id="ProceduralVotingSpeakerTime"></td>
+	</tr>
+</table>
+</center>
+<hr>
+<div class="ProceduralVotingInFavour">
+	<span>In Favour:</span>
+	<br>
+	<select id="ProceduralVotingInFavourCountriesAdder">
+		<option>test</option>
+	</select>
+	<div id="ProceduralVotingInFavourDiv">
+		<ul>
+			<li>Pakistan</li>
+		</ul>
+	</div>
+	<hr>
+	<span>Against:</span>
+	<br>
+	<select id="ProceduralVotingAgainstCountriesAdder">
+		<option>test</option>
+	</select>
+	<div id="ProceduralVotingAgainstDiv">
+		<ul>
+			<li>Africa</li>
+		</ul>
+	</div>
+</div>
+</div>
+</div>
+
+<div id="RollCallVote">
+
+</div>
+</body>
+</html>
